@@ -18,4 +18,5 @@ const CotizacionSchema = new Schema({
 	}]
 });
 
-mongoose.model('Cotizacion', CotizacionSchema);
+const Cotizacion = mongoose.model('Cotizacion', CotizacionSchema);
+module.exports = Cotizacion;
