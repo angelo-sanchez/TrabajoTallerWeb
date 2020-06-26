@@ -36,7 +36,11 @@ const updateClient = (req, res, next) => {
 
 }
 const deleteClient = (req, res, next) => {
-
+	Cliente.deleteOne({ _id: req.params.cliente }, (err) => {
+		if (err) return res.status(500)
+			.json({ msg: `Ocurrió un error en la base de datos: ${err}` })
+		res.status(200).json({ msg: 'OK' });
+	})
 }
 
 module.exports = {

@@ -21,9 +21,7 @@ router.put('/:cliente', (req, res, next) => {
 	const { method, body } = req;
 	console.log({ method, body });
 });
-router.delete('/:cliente', (req, res, next) => {
-	res.status(200).send(`Hola desde ${req.baseUrl}, has solicitado eliminar el cliente con id ${req.params.cliente}`);
-});
+router.delete('/:cliente', clientController.deleteClient);
 
 //RUTAS PARA CLIENTE/COTIZACION
 router.get('/:cliente/cotizaciones', (req, res, next) => {
