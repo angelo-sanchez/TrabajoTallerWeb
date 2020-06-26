@@ -3,7 +3,7 @@ const router = express.Router();
 const clientController = require('../controllers/clientes');
 const cotizationController = require('../controllers/cotizaciones');
 const connect = require('../controllers/connection');
-const Cotizacion = require('../models/Cotizacion');
+const Cliente = require('../models/Cliente');
 
 const db = connect("Angelo", "angelo", "construcciones");
 db.on('error', () => console.error("No se puede conectar a la base de datos"));
@@ -13,7 +13,7 @@ db.once('open', () => console.info("Conexion exitosa a la base de datos:  " + db
 //RUTAS PARA CLIENTES
 router.get('/', (req, res, next) => {
 	//readClients
-	Cotizacion.find((err, clients) => {
+	Cliente.find(filter, (err, clients) => {
 		if (err) return res.status(500)
 			.json({ msg: `Ocurrió un error en la base de datos: ${err}` });
 		if (!(clients && clients.length)) return res.status(404)
