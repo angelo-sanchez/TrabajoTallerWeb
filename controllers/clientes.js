@@ -33,13 +33,17 @@ const readClient = (req, res, next) => {
 	})
 }
 const updateClient = (req, res, next) => {
-
+	Cliente.findByIdAndUpdate(req.params.cliente, req.body, { new: true }, (err, client) => {
+		if (err) return res.status(500)
+			.json({ msg: `Ocurrió un error en la base de datos: ${err}` })
+		res.status(200).json(client);
+	})
 }
 const deleteClient = (req, res, next) => {
 	Cliente.deleteOne({ _id: req.params.cliente }, (err) => {
 		if (err) return res.status(500)
 			.json({ msg: `Ocurrió un error en la base de datos: ${err}` })
-		res.status(200).json({ msg: 'OK' });
+		res.status(200).json({ msg: `Eliminaste el cliente ${req.params.cliente} y toda la información relacionada` });
 	})
 }
 

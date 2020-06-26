@@ -14,13 +14,7 @@ db.once('open', () => console.info("Conexion exitosa a la base de datos:  " + db
 router.get('/', clientController.readClientes);
 router.get('/:cliente', clientController.readClient);
 router.post('/', clientController.createClient);
-
-router.put('/:cliente', (req, res, next) => {
-	res.status(200).send(`Hola desde ${req.baseUrl}, hemos recibido la actualizacion para el cliente ${req.params.cliente}<br>
-	<pre>${JSON.stringify(req.body)}</pre>`);
-	const { method, body } = req;
-	console.log({ method, body });
-});
+router.put('/:cliente', clientController.updateClient);
 router.delete('/:cliente', clientController.deleteClient);
 
 //RUTAS PARA CLIENTE/COTIZACION
