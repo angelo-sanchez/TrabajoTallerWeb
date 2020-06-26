@@ -11,17 +11,8 @@ db.once('open', () => console.info("Conexion exitosa a la base de datos:  " + db
 
 
 //RUTAS PARA CLIENTES
-router.get('/', (req, res, next) => {
-	//readClients
-	Cliente.find(filter, (err, clients) => {
-		if (err) return res.status(500)
-			.json({ msg: `Ocurrió un error en la base de datos: ${err}` });
-		if (!(clients && clients.length)) return res.status(404)
-			.json({ msg: `No se encontraron clientes en la base de datos` });
+router.get('/', clientController.readClientes);
 
-		res.status(200).json(clients);
-	})
-});
 router.get('/:cliente', (req, res, next) => {
 	res.status(200).send(`Hola desde ${req.baseUrl}, has solicitado información del cliente con id ${req.params.cliente}`);
 });
