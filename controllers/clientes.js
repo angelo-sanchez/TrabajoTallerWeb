@@ -24,7 +24,7 @@ const readClientes = (req, res, next) => {
 	})
 }
 const readClient = (req, res, next) => {
-	Cliente.findById(req.params.cuit, (err, client) => {
+	Cliente.findById(req.params.cliente, (err, client) => {
 		if (err) return res.status(500)
 			.json({ msg: `Ocurrió un error en la base de datos: ${err}` });
 		if (!(client)) return res.status(404)

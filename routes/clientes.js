@@ -12,9 +12,9 @@ db.once('open', () => console.info("Conexion exitosa a la base de datos:  " + db
 
 //RUTAS PARA CLIENTES
 router.get('/', clientController.readClientes);
-
 router.get('/:cliente', clientController.readClient);
 router.post('/', clientController.createClient);
+
 router.put('/:cliente', (req, res, next) => {
 	res.status(200).send(`Hola desde ${req.baseUrl}, hemos recibido la actualizacion para el cliente ${req.params.cliente}<br>
 	<pre>${JSON.stringify(req.body)}</pre>`);
