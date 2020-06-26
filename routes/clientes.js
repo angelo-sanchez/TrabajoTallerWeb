@@ -16,12 +16,7 @@ router.get('/', clientController.readClientes);
 router.get('/:cliente', (req, res, next) => {
 	res.status(200).send(`Hola desde ${req.baseUrl}, has solicitado información del cliente con id ${req.params.cliente}`);
 });
-router.post('/', (req, res, next) => {
-	res.status(200).send(`Hola desde ${req.baseUrl}, hemos recibido el cliente:<br>
-	<pre>${JSON.stringify(req.body)}</pre>`);
-	const { method, body } = req;
-	console.log({ method, body });
-});
+router.post('/', clientController.createClient);
 router.put('/:cliente', (req, res, next) => {
 	res.status(200).send(`Hola desde ${req.baseUrl}, hemos recibido la actualizacion para el cliente ${req.params.cliente}<br>
 	<pre>${JSON.stringify(req.body)}</pre>`);

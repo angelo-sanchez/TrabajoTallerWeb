@@ -1,7 +1,15 @@
+const express = require('express');
 const mongoose = require('mongoose');
-const Cotizacion = require('../models/Cotizacion');
+const Cliente = require('../models/Cliente');
 
 const createClient = (req, res, next) => {
+	const client = new Cliente({ _id: req.body.cuit, nombre: req.body.nombre });
+	client.save({ validateBeforeSave: true }, (err, inserted) => {
+		if (err || !inserted) return res.status(500).json({ msg: `No se puede guardar el cliente, error: ${err}` });
+		res.status(200).json(inserted);
+	});
+}
+const readClientes = (req, res, next) => {
 	//readClients
 	Cliente.find((err, clients) => {
 		if (err) return res.status(500)
@@ -11,9 +19,6 @@ const createClient = (req, res, next) => {
 
 		res.status(200).json(clients);
 	})
-}
-const readClientes = (req, res, next) => {
-
 }
 const readClient = (req, res, next) => {
 
