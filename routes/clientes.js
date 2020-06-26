@@ -2,13 +2,11 @@ const express = require('express');
 const router = express.Router();
 const clientController = require('../controllers/clientes');
 const cotizationController = require('../controllers/cotizaciones');
-const connect = require('../controllers/connection');
-const Cliente = require('../models/Cliente');
 
+const connect = require('../controllers/connection');
 const db = connect("Angelo", "angelo", "construcciones");
 db.on('error', () => console.error("No se puede conectar a la base de datos"));
 db.once('open', () => console.info("Conexion exitosa a la base de datos:  " + db.name));
-
 
 //RUTAS PARA CLIENTES
 router.get('/', clientController.readClientes);
