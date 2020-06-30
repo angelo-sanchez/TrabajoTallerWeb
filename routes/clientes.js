@@ -16,13 +16,10 @@ router.put('/:cliente', clientController.updateClient);
 router.delete('/:cliente', clientController.deleteClient);
 
 //RUTAS PARA CLIENTE/COTIZACION
-router.get('/:cliente/cotizaciones', (req, res, next) => {
-	res.status(200).send('Hola desde ' + req.baseUrl);
-});
-router.get('/:cliente/cotizaciones/:cotizacion', (req, res, next) => {
-	res.status(200).send(`Hola desde ${req.baseUrl}, has solicitado la cotizacion ${req.params.cotizacion},la cual pertenece al cliente ${req.params.cliente}`);
-});
+router.get('/:cliente/cotizaciones', cotizationController.readCotizations);
+router.get('/:cliente/cotizaciones/:cotizacion', cotizationController.readCotization);
 router.post('/:cliente/cotizaciones', cotizationController.createCotization);
+
 router.put('/:cliente/cotizaciones/:cotizacion', (req, res, next) => {
 	res.status(200).send(`Hola desde ${req.baseUrl}, hemos recibido una actualizacion para la cotizacion ${req.params.cotizacion} del cliente ${req.params.cliente}<br>
 		<pre>${JSON.stringify(req.body)}</pre>`);

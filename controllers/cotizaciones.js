@@ -28,9 +28,18 @@ module.exports = {
 				.json({ msg: `Ocurrió un error en la base de datos: ${err}` });
 			return res.status(200).json(client.cotizaciones);
 		});
-	}
+	},
 
 	//READ BY ID
+	readCotization: (req, res) => {
+		const client = req.params.cliente,
+			cotId = req.params.cotizacion;
+		Cliente.findOne({ _id: client, "cotizaciones._id": cotId }, { "cotizaciones.$.": 1 }, (err, client) => {
+			if (err) return res.status(500)
+				.json({ msg: `Ocurrió un error en la base de datos: ${err}` });
+			return res.status(200).json(client.cotizaciones);
+		});
+	}
 
 	//UPDATE BY ID
 
