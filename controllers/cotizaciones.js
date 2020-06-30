@@ -18,9 +18,17 @@ module.exports = {
 					cotizacion
 				});
 		})
-	}
+	},
 
 	//READ ALL
+	readCotizations: (req, res) => {
+		const client = req.params.cliente;
+		Cliente.findById(client, { cotizaciones: 1 }, (err, client) => {
+			if (err) return res.status(500)
+				.json({ msg: `Ocurrió un error en la base de datos: ${err}` });
+			return res.status(200).json(client.cotizaciones);
+		});
+	}
 
 	//READ BY ID
 

@@ -15,7 +15,8 @@ const connect = (user, password, dbname) => {
 		authSource: dbname,
 		dbName: dbname,
 		useNewUrlParser: true,
-		useUnifiedTopology: true
+		useUnifiedTopology: true,
+		useFindAndModify: false
 	}, err => {
 		err ? console.error(err.message) : console.info("Connection success");
 	});
