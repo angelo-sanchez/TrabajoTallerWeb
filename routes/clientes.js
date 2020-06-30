@@ -22,13 +22,7 @@ router.get('/:cliente/cotizaciones', (req, res, next) => {
 router.get('/:cliente/cotizaciones/:cotizacion', (req, res, next) => {
 	res.status(200).send(`Hola desde ${req.baseUrl}, has solicitado la cotizacion ${req.params.cotizacion},la cual pertenece al cliente ${req.params.cliente}`);
 });
-router.post('/:cliente/cotizaciones', (req, res, next) => {
-	res.status(200).send(`Hola desde ${req.baseUrl}, hemos recibido la cotizacion:<br>
-		<pre>${JSON.stringify(req.body)}</pre><br>
-		para agregar al cliente ${req.params.cliente}`);
-	const { method, body } = req;
-	console.log({ method, body });
-});
+router.post('/:cliente/cotizaciones', cotizationController.createCotization);
 router.put('/:cliente/cotizaciones/:cotizacion', (req, res, next) => {
 	res.status(200).send(`Hola desde ${req.baseUrl}, hemos recibido una actualizacion para la cotizacion ${req.params.cotizacion} del cliente ${req.params.cliente}<br>
 		<pre>${JSON.stringify(req.body)}</pre>`);
