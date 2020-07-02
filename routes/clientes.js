@@ -20,9 +20,6 @@ router.get('/:cliente/cotizaciones', cotizationController.readCotizations);
 router.get('/:cliente/cotizaciones/:cotizacion', cotizationController.readCotization);
 router.post('/:cliente/cotizaciones', cotizationController.createCotization);
 router.put('/:cliente/cotizaciones/:cotizacion', cotizationController.updateCotization);
-
-router.delete('/:cliente/cotizaciones/:cotizacion', (req, res, next) => {
-	res.status(200).send(`Hola desde ${req.baseUrl}, has solicitado eliminar la cotizacion con id ${req.params.cotizacion}, dirigida al cliente ${req.params.cliente}`);
-});
+router.delete('/:cliente/cotizaciones/:cotizacion', cotizationController.deleteCotization);
 
 module.exports = router;

@@ -59,10 +59,21 @@ module.exports = {
 				.json({ msg: `Ocurrió un error en la base de datos: ${err}` });
 			return res.status(200).json(doc);
 		})
-	}
+	},
 
 	//DELETE BY ID
-
+	deleteCotization: (req, res) => {
+		const client = req.params.cliente,
+			cotId = req.params.cotizacion;
+		Cliente.findByIdAndUpdate(
+			client, { $pull: { cotizaciones: { _id: cotId } } },
+			(err, doc) => {
+				if (err) return res.status(500)
+					.json({ msg: `Ocurrió un error en la base de datos: ${err}` });
+				return res.status(200).json({ msg: `Se eliminó la cotización ${cotId}` })
+			}
+		)
+	}
 }
 
 const parseUpdate = (body) => {
@@ -83,7 +94,7 @@ const parseUpdate = (body) => {
 			upd["cotizaciones.$[cotizacion].materiales"] = JSON.parse(body.materiales);
 		}
 	} catch (error) {
-		return console.error({ error });
+		return;
 	}
 	console.log(JSON.stringify(upd));
 	return upd;
